@@ -35,7 +35,6 @@ export function ga(ComposedComponent) {
     }
 
     handleMouseEnter(e) {
-      console.log('enter', e.clientX, e.clientY);
       send("event", {
         eventCategory: "Widget",
         eventAction:   "MouseEnter",
@@ -44,7 +43,6 @@ export function ga(ComposedComponent) {
     }
 
     handleMouseLeave(e) {
-      console.log('leave', e.clientX, e.clientY);
       send("event", {
         eventCategory: "Widget",
         eventAction:   "MouseLeave",
