@@ -1,23 +1,36 @@
 {
   "name": "tln-google-analytics",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Google analytics wrapper",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "babel -t runtime src -d lib"
+    "compile": "babel src/ --out-dir lib/ -x '.js,.jsx'",
+    "prepublish": "npm run compile"
   },
+  "private": true,
   "author": "",
   "license": "ISC",
+  "files": [
+    "lib/",
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RonBalnen/tln-google-analytics.git"
+  },
   "devDependencies": {
     "babel-core": "^6.5.2",
+    "babel-plugin-add-module-exports": "^0.1.2",
     "babel-preset-es2015": "^6.5.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-runtime": "^6.5.0",
-    "babel-preset-react": "^6.5.0"
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0"
   },
   "peerDependencies": {
     "react": "^0.14.6",
     "react-dom": "^0.14.6"
+  },
+  "dependencies": {
+    "react-google-tag-manager": "^1.0.1"
   }
 }

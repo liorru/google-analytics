@@ -1,41 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export const FATAL = true;
-export const NOT_FATAL = false;
+import GoogleTagManager from './GoogleTagManager';
 
-const analytics = __CLIENT__ ? window.ga : () => undefined;
+const dataLayer = __CLIENT__ ? window.dataLayer : [];
+const analytics = {};
 
-export const googleAnalyticsCode = __DEVELOPMENT__ ? 'window.ga = function(){};' : `
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-`;
-
-export const create = function(gaUa) {
-  analytics.call(null, 'create', gaUa, 'auto');
-};
-
-export const error = (msg, isFatal) => {
-  analytics.bind(null, 'send', 'exception', {
-    exDescription: msg,
-    exFatal: isFatal
+analytics.send = function(event, payload) {
+  dataLayer.push({
+    event,
+    ...payload
   })
 };
-export const send = analytics.bind(null, 'send');
-export const set = analytics.bind(null, 'set');
 
 export function ga(ComposedComponent) {
   return class Decorator extends React.Component {
-
     constructor() {
       super();
-      this.state = {};
     }
 
     handleMouseEnter(e) {
-      send("event", {
+      analytics.send("event", {
         eventCategory: "Widget",
         eventAction:   "MouseEnter",
         eventLabel:    ""
@@ -43,7 +28,7 @@ export function ga(ComposedComponent) {
     }
 
     handleMouseLeave(e) {
-      send("event", {
+      analytics.send("event", {
         eventCategory: "Widget",
         eventAction:   "MouseLeave",
         eventLabel:    ""
@@ -69,10 +54,8 @@ export function ga(ComposedComponent) {
   };
 }
 
-export default {
-  analytics,
-  create,
-  error,
-  send,
-  set
+
+export {
+  GoogleTagManager,
+  analytics
 };
