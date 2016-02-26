@@ -8,7 +8,6 @@
     "compile": "babel src/ --out-dir lib/ -x '.js,.jsx'",
     "prepublish": "npm run compile"
   },
-  "private": true,
   "author": "",
   "license": "ISC",
   "files": [
