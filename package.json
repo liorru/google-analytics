@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RonBalnen/tln-google-analytics.git"
+    "url": "git+https://github.com/liorru/tq-google-analytics.git"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
